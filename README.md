@@ -57,13 +57,13 @@ Here's a simple example of how to use the Redis Search Python:
 
 ## Config <a id='configuration'></a>
 algorithm to tokenize thai words before sending to redis server
-*ver.py
+-ver.py  
 
 
 setting of query type to send to redis server
-*search_data.py
-
-
+-search_data.py  
+  
+  
 
 
 For more information on how to use the Redis Search Python library, please refer to the [documentation](https://github.com/redislabs/redisearch-py).
