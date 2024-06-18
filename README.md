@@ -56,11 +56,11 @@ Here's a simple example of how to use the Redis Search Python:
 >```
 
 ## Config <a id='configuration'></a>
-algorithm to tokenize thai words before sending to redis server
+algorithm to tokenize thai words before sending to redis server  
 -ver.py  
 
 
-setting of query type to send to redis server
+setting of query type to send to redis server  
 -search_data.py  
   
   
