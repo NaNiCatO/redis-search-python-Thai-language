@@ -55,6 +55,18 @@ Here's a simple example of how to use the Redis Search Python:
 >python pyqt_app.py
 >```
 
+>Connecting grpc client to grpc server
+>```python
+>import search_pb2
+>import search_pb2_grpc
+>
+>grpc_channel = grpc.insecure_channel('localhost:50051')
+>stub = search_pb2_grpc.SearchServiceStub(self.grpc_channel)
+>```
+
+>grpc services
+>in the `search.proto`
+
 ## Config <a id='configuration'></a>
 algorithm to tokenize thai words before sending to redis server  
 -ver.py  
@@ -62,7 +74,6 @@ algorithm to tokenize thai words before sending to redis server
 
 setting of query type to send to redis server  
 -search_data.py  
-  
   
 
 
