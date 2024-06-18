@@ -78,3 +78,4 @@ setting of query type to send to redis server
 
 
 For more information on how to use the Redis Search Python library, please refer to the [documentation](https://github.com/redislabs/redisearch-py).
+For more information on how to use the gPRC Python library, please refer to the [documentation](https://github.com/grpc/grpc).
