@@ -6,8 +6,9 @@ This project is a Python implementation of Redis search functionality. It allows
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Configuration](#configuration)
 - [Example](#example)
+- [Configuration](#configuration)
+
 
 ## Installation <a id='installation'></a>
 
