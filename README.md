@@ -76,6 +76,7 @@ Here's a simple example of how to use the Redis Search Python:
 
 ## Example <a id='example'></a>
 
+# testing grpc server
 > service SayHello
 >```python
 >import grpc
@@ -93,7 +94,8 @@ Here's a simple example of how to use the Redis Search Python:
 >    say_hello(stub, 'World')
 >```
 
-
+# Unary RPCs
+client sends a single request to the server and gets a single response back
 > service Query
 >```python
 >import grpc
@@ -113,7 +115,8 @@ Here's a simple example of how to use the Redis Search Python:
 >   query(stub, 'example', 1, 10)
 >```
 
-
+# Bidirectional streaming RPCs
+both sides send a sequence of messages using a read-write stream. The two streams operate independently
 > service StreamQuery list of request
 >```python
 >import grpc
