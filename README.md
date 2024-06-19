@@ -15,6 +15,8 @@ This project provides a gRPC service for a search engine using Redis and Redisea
 - [Usage](#usage)
 - [Example](#example)
 - [Configuration](#configuration)
+- [Performance Benchmark](#performance)
+-
 
 
 ## Installation <a id='installation'></a>
@@ -235,9 +237,9 @@ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. search.proto
 For more information on how to use the Redis Search Python library, please refer to the [documentation](https://github.com/redislabs/redisearch-py).  
 For more information on how to use the gPRC Python library, please refer to the [documentation](https://github.com/grpc/grpc).
 
-## Performance Benchmark
+## Performance Benchmark <a id='performance'></a>
 To measure the performance of the gRPC server, we use tools ghz to load test the server.  
-**test case:**
+**Test case:**
 - total: 1000
 - stream-interval: 0
 **request message**
