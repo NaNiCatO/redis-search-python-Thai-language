@@ -16,7 +16,6 @@ This project provides a gRPC service for a search engine using Redis and Redisea
 - [Example](#example)
 - [Configuration](#configuration)
 - [Performance Benchmark](#performance)
--
 
 
 ## Installation <a id='installation'></a>
@@ -251,7 +250,7 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 **result**
 - total hit: 20000+
 
-# Synchronous server
+### Synchronous server
 **Query service**
 | concurrency 1 | concurrency 10 |
 |:-------------:|:--------------:|
@@ -262,7 +261,7 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 |:-------------:|:--------------:|
 |    24.24 ms   |    164.68 ms   |
 
-# asynchronous server
+### asynchronous server
 **Query service**
 | concurrency 1 | concurrency 10 |
 |:-------------:|:--------------:|
