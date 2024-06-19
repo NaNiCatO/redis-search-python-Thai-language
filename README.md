@@ -80,15 +80,21 @@ Here's a simple example of how to use the Redis Search Python:
 > service SayHello
 >```python
 >import grpc
+>
+># Import the generated classes for our protocol buffer message and service definitions.
 >import search_pb2
 >import search_pb2_grpc
 >
+># Function to call the SayHello RPC method.
 >def say_hello(stub, name):
+>    # Create a HelloRequest message and Call the SayHello method on the stub (client)
 >    response = stub.SayHello(search_pb2.HelloRequest(name=name))
 >    print(f"SayHello response: {response.message}")
 >
 >def main():
+>    # Create an insecure gRPC channel to the server running on localhost at port 50051.
 >    with grpc.insecure_channel('localhost:50051') as channel:
+>         # Create a stub (client) for the SearchService using the channel.
 >         stub = search_pb2_grpc.SearchServiceStub(channel)
 >
 >    say_hello(stub, 'World')
@@ -99,18 +105,25 @@ client sends a single request to the server and gets a single response back
 > service Query
 >```python
 >import grpc
+>
+># Import the generated classes for our protocol buffer message and service definitions.
 >import search_pb2
 >import search_pb2_grpc
 >
+># Function to call the Query RPC method.
 >def query(stub, query, page, limit):
+>    # Create a QueryRequest message and Call the SayHello method on the stub (client)
 >    response = stub.Query(search_pb2.QueryRequest(query=query, page=page, limit=limit))
+>
 >    print(f"Query response: {response.total_hits} hits")
 >    for doc in response.items:
 >        print(f"Document: {doc.name}, {doc.location}")
 >
 >def main():
->   with grpc.insecure_channel('localhost:50051') as channel:
->        stub = search_pb2_grpc.SearchServiceStub(channel)
+>    # Create an insecure gRPC channel to the server running on localhost at port 50051.
+>    with grpc.insecure_channel('localhost:50051') as channel:
+>         # Create a stub (client) for the SearchService using the channel.
+>         stub = search_pb2_grpc.SearchServiceStub(channel)
 >
 >   query(stub, 'example', 1, 10)
 >```
@@ -120,23 +133,31 @@ the server wait to receive all the client messages before writing its responses
 > service StreamQuery list of request
 >```python
 >import grpc
+>
+># Import the generated classes for our protocol buffer message and service definitions.
 >import search_pb2
 >import search_pb2_grpc
 >
+># Function to call the StreamQuery RPC method with streaming requests.
 >def stream_query(stub, queries):
+>    # Inner generator function to yield QueryRequest messages for each query.
 >    def query_iterator():
 >        for q in queries:
 >            yield search_pb2.QueryRequest(query=q['query'], page=q['page'], limit=q['limit'])
->    
+>
+>    # Call the StreamQuery method on the stub (client) with the query_iterator generator.
 >    for response in stub.StreamQuery(query_iterator()):
 >        print(f"StreamQuery response: {response.total_hits} hits")
 >        for doc in response.items:
 >            print(f"Document: {doc.name}, {doc.location}")
 >
 >def main():
->   with grpc.insecure_channel('localhost:50051') as channel:
->        stub = search_pb2_grpc.SearchServiceStub(channel)
+>    # Create an insecure gRPC channel to the server running on localhost at port 50051.
+>    with grpc.insecure_channel('localhost:50051') as channel:
+>         # Create a stub (client) for the SearchService using the channel.
+>         stub = search_pb2_grpc.SearchServiceStub(channel)
 >
+>        # List of queries to send to the StreamQuery method.
 >        queries = [
 >            {'query': 'โรงเรียน', 'page': 0, 'limit': 10},
 >            {'query': 'โรงแรม', 'page': 0, 'limit': 10}
@@ -149,10 +170,14 @@ the server alternately read a message then write a message
 > service StreamQuery continuously ask the user for input
 >```python
 >import grpc
+>
+># Import the generated classes for our protocol buffer message and service definitions.
 >import search_pb2
 >import search_pb2_grpc
 >
+># Function to continuously prompt the user for queries and stream responses from the server.
 >def loop_query(stub):
+>    # Inner generator function to yield QueryRequest messages based on user input.
 >    def query_iterator():
 >        print("Enter your query (or type 'exit' to stop): ")
 >        while True:
@@ -161,14 +186,17 @@ the server alternately read a message then write a message
 >                break
 >            yield search_pb2.QueryRequest(query=query, page=0, limit=10)
 >
+>    # Call the StreamQuery method on the stub (client) with the query_iterator generator.
 >    for response in stub.StreamQuery(query_iterator()):
 >        print(f"StreamQuery response: {response.total_hits} hits")
 >        for doc in response.items:
 >            print(f"Document: {doc.name}, {doc.location}")
 >
 >def main():
+>    # Create an insecure gRPC channel to the server running on localhost at port 50051.
 >    with grpc.insecure_channel('localhost:50051') as channel:
->        stub = search_pb2_grpc.SearchServiceStub(channel)
+>         # Create a stub (client) for the SearchService using the channel.
+>         stub = search_pb2_grpc.SearchServiceStub(channel)
 >
 >        loop_query(stub)
 >```
