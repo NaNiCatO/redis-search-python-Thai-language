@@ -250,10 +250,15 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 - total hit: 20000+
 
 # Synchronous server
-**Query service**                         **SteamQuery service**
-| concurrency 1 | concurrency 10 |          | concurrency 1 | concurrency 10 |
-|:-------------:|:--------------:|          |:-------------:|:--------------:|
-|    24.24 ms   |    164.68 ms   |          |    24.24 ms   |    164.68 ms   |
+**Query service**                         
+| concurrency 1 | concurrency 10 |
+|:-------------:|:--------------:|
+|    24.24 ms   |    164.68 ms   |
+
+**SteamQuery service**
+| concurrency 1 | concurrency 10 |
+|:-------------:|:--------------:|
+|    24.24 ms   |    164.68 ms   |
 
 # asynchronous server
 **Query service**                         **SteamQuery service**
