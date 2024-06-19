@@ -117,7 +117,7 @@ _________________________________
 ![say_hello](/image/query-service.png)  
 
 _________________________________
-### Unary RPCs
+### Unary RPCs Search
 client sends a single request to the server and gets a single response back
 > service Query
 >```python
@@ -147,7 +147,7 @@ client sends a single request to the server and gets a single response back
 ![query](/image/query-service.png)  
 
 _________________________________
-### Bidirectional streaming RPCs
+### Bidirectional streaming RPCs Search
 the server wait to receive all the client messages before writing its responses
 > service StreamQuery list of request
 >```python
@@ -186,7 +186,7 @@ the server wait to receive all the client messages before writing its responses
 ![stream_query_v1](/image/steamquery-v1-service.png)  
 
 _________________________________
-### Bidirectional streaming RPCs
+### Bidirectional streaming RPCs Search
 the server alternately read a message then write a message
 > service StreamQuery continuously ask the user for input
 >```python
