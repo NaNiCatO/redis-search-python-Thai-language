@@ -2,6 +2,13 @@
 
 This project is a Python implementation of Redis search functionality. It allows you to perform full-text search operations on data stored in Redis for Thai language text.
 
+## Search Service gRPC Overview
+
+This project provides a gRPC service for a search engine using Redis and Redisearch. The service includes the following functionalities:
+- SayHello: A simple greeting service.
+- Query: A search query service that returns results based on the provided query.
+- StreamQuery: A streaming search query service that continuously processes queries and returns results.
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -11,6 +18,12 @@ This project is a Python implementation of Redis search functionality. It allows
 
 
 ## Installation <a id='installation'></a>
+
+### Prerequisites
+
+- Python 3.7 or later
+- pip (Python package installer)
+- Redis server
 
 To install the Redis Search Python library, you can use pip:
 
@@ -99,6 +112,7 @@ Here's a simple example of how to use the Redis Search Python:
 >
 >    say_hello(stub, 'World')
 >```
+![say_hello](/image/query-service.png)  
 
 ### Unary RPCs
 client sends a single request to the server and gets a single response back
@@ -127,6 +141,7 @@ client sends a single request to the server and gets a single response back
 >
 >   query(stub, 'example', 1, 10)
 >```
+![query](/image/query-service.png)  
 
 ### Bidirectional streaming RPCs
 the server wait to receive all the client messages before writing its responses
@@ -164,6 +179,7 @@ the server wait to receive all the client messages before writing its responses
 >        ]
 >        stream_query(stub, queries)
 >```
+![stream_query_v1](/image/steamquery-v1-service.png)  
 
 ### Bidirectional streaming RPCs
 the server alternately read a message then write a message
@@ -200,16 +216,61 @@ the server alternately read a message then write a message
 >
 >        loop_query(stub)
 >```
+![stream_query_v2](/image/steamquery-v2-service.png)  
 
 ## Config <a id='configuration'></a>
 algorithm to tokenize thai words before sending to redis server  
--ver.py  
-
+- `ver.py`  
 
 setting of query type to send to redis server  
--search_data.py  
-  
+- `search_data.py`  
 
+config massage and grpc services
+- `search.proto`
+Generate gRPC code from the `search.proto` file:
+```sh
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. search.proto
+```
 
 For more information on how to use the Redis Search Python library, please refer to the [documentation](https://github.com/redislabs/redisearch-py).  
 For more information on how to use the gPRC Python library, please refer to the [documentation](https://github.com/grpc/grpc).
+
+## Performance Benchmark
+To measure the performance of the gRPC server, we use tools ghz to load test the server.  
+**test case:**
+- total: 1000
+- stream-interval: 0
+**request message**
+{
+  "query": "โรงเรียน",
+  "page": 1,
+  "limit": 10
+}
+**result**
+- total hit: 20000+
+
+# Synchronous server
+**Query service**                         **SteamQuery service**
+| concurrency 1 | concurrency 10 |          | concurrency 1 | concurrency 10 |
+|:-------------:|:--------------:|          |:-------------:|:--------------:|
+|    24.24 ms   |    164.68 ms   |          |    24.24 ms   |    164.68 ms   |
+
+# asynchronous server
+**Query service**                         **SteamQuery service**
+| concurrency 1 | concurrency 10 |          | concurrency 1 | concurrency 10 |
+|:-------------:|:--------------:|          |:-------------:|:--------------:|
+|    23.16 ms   |    202.83 ms   |          |    23.37 ms   |    208.39 ms   |
+
+
+## Citations
+This project utilizes concepts and technologies from the following sources:
+- [gRPC Core Concepts](https://grpc.io/docs/what-is-grpc/core-concepts/)
+- [Redis Search and Query](https://redis.io/docs/latest/develop/interact/search-and-query/)
+- [gRPC Performance Guide](https://grpc.io/docs/guides/performance/)
+- [N-gram on Wikipedia](https://en.wikipedia.org/wiki/N-gram)
+
+## Contributions
+I am the sole contributor to this project. Contributions are welcome! Please fork the repository and submit a pull request.
+
+## License
+This project is licensed under the MIT License.
