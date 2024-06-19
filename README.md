@@ -17,7 +17,7 @@ This project provides a gRPC service for a search engine using Redis and Redisea
 - [Configuration](#configuration)
 - [Performance Benchmark](#performance)
 
-
+_________________________________
 ## Installation <a id='installation'></a>
 
 ### Prerequisites
@@ -50,7 +50,7 @@ Deploying Redis with the RediSearch module in Docker
 >docker run -d --name redisearch -p 6379:6379 redislabs/redisearch:latest
 >```
 
-
+_________________________________
 ## Usage <a id='usage'></a>
 
 Here's a simple example of how to use the Redis Search Python:
@@ -88,6 +88,7 @@ Here's a simple example of how to use the Redis Search Python:
 >python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. search.proto
 >```
 
+_________________________________
 ## Example <a id='example'></a>
 
 ### testing grpc server
@@ -115,6 +116,7 @@ Here's a simple example of how to use the Redis Search Python:
 >```
 ![say_hello](/image/query-service.png)  
 
+_________________________________
 ### Unary RPCs
 client sends a single request to the server and gets a single response back
 > service Query
@@ -144,6 +146,7 @@ client sends a single request to the server and gets a single response back
 >```
 ![query](/image/query-service.png)  
 
+_________________________________
 ### Bidirectional streaming RPCs
 the server wait to receive all the client messages before writing its responses
 > service StreamQuery list of request
@@ -182,6 +185,7 @@ the server wait to receive all the client messages before writing its responses
 >```
 ![stream_query_v1](/image/steamquery-v1-service.png)  
 
+_________________________________
 ### Bidirectional streaming RPCs
 the server alternately read a message then write a message
 > service StreamQuery continuously ask the user for input
@@ -219,6 +223,8 @@ the server alternately read a message then write a message
 >```
 ![stream_query_v2](/image/steamquery-v2-service.png)  
 
+
+_________________________________
 ## Config <a id='configuration'></a>
 algorithm to tokenize thai words before sending to redis server  
 - `ver.py`  
@@ -236,6 +242,7 @@ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. search.proto
 For more information on how to use the Redis Search Python library, please refer to the [documentation](https://github.com/redislabs/redisearch-py).  
 For more information on how to use the gPRC Python library, please refer to the [documentation](https://github.com/grpc/grpc).
 
+_________________________________
 ## Performance Benchmark <a id='performance'></a>
 To measure the performance of the gRPC server, we use tools ghz to load test the server.  
 **Test case:**
@@ -250,6 +257,7 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 **result**
 - total hit: 20000+
 
+_________________________________
 ### Synchronous server
 **Query service**
 | concurrency 1 | concurrency 10 |
@@ -261,6 +269,7 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 |:-------------:|:--------------:|
 |    24.24 ms   |    164.68 ms   |
 
+_________________________________
 ### asynchronous server
 **Query service**
 | concurrency 1 | concurrency 10 |
@@ -273,6 +282,7 @@ To measure the performance of the gRPC server, we use tools ghz to load test the
 |    23.37 ms   |    208.39 ms   |
 
 
+_________________________________
 ## Citations
 This project utilizes concepts and technologies from the following sources:
 - [gRPC Core Concepts](https://grpc.io/docs/what-is-grpc/core-concepts/)
