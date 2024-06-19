@@ -245,16 +245,16 @@ For more information on how to use the gPRC Python library, please refer to the 
 _________________________________
 ## Performance Benchmark <a id='performance'></a>
 To measure the performance of the gRPC server, we use tools ghz to load test the server.  
-**Test case:**
+**Test case:**  
 - total: 1000
 - stream-interval: 0
-**request message**
+**request message**  
 {
   "query": "โรงเรียน",
   "page": 1,
   "limit": 10
 }
-**result**
+**result**  
 - total hit: 20000+
 
 _________________________________
