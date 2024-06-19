@@ -89,6 +89,7 @@ Here's a simple example of how to use the Redis Search Python:
 >def main():
 >    with grpc.insecure_channel('localhost:50051') as channel:
 >         stub = search_pb2_grpc.SearchServiceStub(channel)
+>
 >    say_hello(stub, 'World')
 >```
 
@@ -108,6 +109,7 @@ Here's a simple example of how to use the Redis Search Python:
 >def main():
 >   with grpc.insecure_channel('localhost:50051') as channel:
 >        stub = search_pb2_grpc.SearchServiceStub(channel)
+>
 >   query(stub, 'example', 1, 10)
 >```
 
@@ -131,6 +133,7 @@ Here's a simple example of how to use the Redis Search Python:
 >def main():
 >   with grpc.insecure_channel('localhost:50051') as channel:
 >        stub = search_pb2_grpc.SearchServiceStub(channel)
+>
 >        queries = [
 >            {'query': 'โรงเรียน', 'page': 0, 'limit': 10},
 >            {'query': 'โรงแรม', 'page': 0, 'limit': 10}
@@ -159,7 +162,10 @@ Here's a simple example of how to use the Redis Search Python:
 >            print(f"Document: {doc.name}, {doc.location}")
 >
 >def main():
->    loop_query(stub)
+>    with grpc.insecure_channel('localhost:50051') as channel:
+>        stub = search_pb2_grpc.SearchServiceStub(channel)
+>
+>        loop_query(stub)
 >```
 
 ## Config <a id='configuration'></a>
